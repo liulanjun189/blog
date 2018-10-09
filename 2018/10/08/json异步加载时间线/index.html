@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="如何使用canvas1、添加canvas标签 1234567891011121314151617181920212223242526272829303132333435&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&quot;en&quot;&amp;gt;&amp;lt;head&amp;gt;	&amp;lt;meta charset=&quot;UTF-8&quot;&amp;gt;	&amp;lt;title&amp;gt;Document&amp;lt;/title">
+<meta name="description" content="json  json是一种传输数据的格式（以对象为样板，本质上就是对象，但用途有区别，对象就是本地用的，json是用来传输的）JSON.parse();string-&amp;gt;json JSON.stringify();json-&amp;gt;string 异步加载js  js加载的缺点：加载工具方法没必要阻塞文档，过得js加载会影响页面效率，一旦网速不好，那么整个网站将等待js加载而不进行后续渲染等工作">
 <meta property="og:type" content="article">
-<meta property="og:title" content="canvas的知识">
-<meta property="og:url" content="https://liulanjun189.github.io/blog/2018/09/21/notes06/index.html">
+<meta property="og:title" content="json、异步加载、时间线">
+<meta property="og:url" content="https://liulanjun189.github.io/blog/2018/10/08/json异步加载时间线/index.html">
 <meta property="og:site_name" content="刘兰俊的笔记">
-<meta property="og:description" content="如何使用canvas1、添加canvas标签 1234567891011121314151617181920212223242526272829303132333435&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&quot;en&quot;&amp;gt;&amp;lt;head&amp;gt;	&amp;lt;meta charset=&quot;UTF-8&quot;&amp;gt;	&amp;lt;title&amp;gt;Document&amp;lt;/title">
+<meta property="og:description" content="json  json是一种传输数据的格式（以对象为样板，本质上就是对象，但用途有区别，对象就是本地用的，json是用来传输的）JSON.parse();string-&amp;gt;json JSON.stringify();json-&amp;gt;string 异步加载js  js加载的缺点：加载工具方法没必要阻塞文档，过得js加载会影响页面效率，一旦网速不好，那么整个网站将等待js加载而不进行后续渲染等工作">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-30T03:19:19.104Z">
+<meta property="og:updated_time" content="2018-10-09T02:57:12.164Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="canvas的知识">
-<meta name="twitter:description" content="如何使用canvas1、添加canvas标签 1234567891011121314151617181920212223242526272829303132333435&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&quot;en&quot;&amp;gt;&amp;lt;head&amp;gt;	&amp;lt;meta charset=&quot;UTF-8&quot;&amp;gt;	&amp;lt;title&amp;gt;Document&amp;lt;/title">
+<meta name="twitter:title" content="json、异步加载、时间线">
+<meta name="twitter:description" content="json  json是一种传输数据的格式（以对象为样板，本质上就是对象，但用途有区别，对象就是本地用的，json是用来传输的）JSON.parse();string-&amp;gt;json JSON.stringify();json-&amp;gt;string 异步加载js  js加载的缺点：加载工具方法没必要阻塞文档，过得js加载会影响页面效率，一旦网速不好，那么整个网站将等待js加载而不进行后续渲染等工作">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://liulanjun189.github.io/blog/2018/09/21/notes06/"/>
+  <link rel="canonical" href="https://liulanjun189.github.io/blog/2018/10/08/json异步加载时间线/"/>
 
 
 
 
 
-  <title>canvas的知识 | 刘兰俊的笔记</title>
+  <title>json、异步加载、时间线 | 刘兰俊的笔记</title>
   
 
 
@@ -242,7 +242,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liulanjun189.github.io/blog/blog/2018/09/21/notes06/">
+    <link itemprop="mainEntityOfPage" href="https://liulanjun189.github.io/blog/blog/2018/10/08/json异步加载时间线/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liulanjun">
@@ -259,7 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">canvas的知识</h1>
+          <h1 class="post-title" itemprop="name headline">json、异步加载、时间线</h1>
         
 
         <div class="post-meta">
@@ -271,8 +271,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T10:55:54+08:00">
-                2018-09-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-08T16:22:54+08:00">
+                2018-10-08
               </time>
             
 
@@ -290,9 +290,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/blog/2018/09/21/notes06/#comments" itemprop="discussionUrl">
+                <a href="/blog/2018/10/08/json异步加载时间线/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/21/notes06/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/10/08/json异步加载时间线/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -320,8 +320,12 @@
       
 
       
-        <p>如何使用canvas<br>1、添加canvas标签</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;canvas id=<span class="string">"canvasl"</span> width=500 height=500&gt;&lt;/canvas&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">		2、获得canvas元素</span><br><span class="line">		var oCanvasl=document.getElementById(<span class="string">'canvasl'</span>);</span><br><span class="line">		3、获得canvas上下文对象</span><br><span class="line">		var ctx=oCanvasl.getContext(<span class="string">'2d'</span>);//为啥不是3d呢？因为canvas</span><br><span class="line">		是绘制2d的</span><br><span class="line">		webGL绘图上下文时---&gt;<span class="string">'webgl'</span>//绘制3d</span><br><span class="line"></span><br><span class="line">		ctx.moveTo(100,100);</span><br><span class="line">		ctx.lineTo(200,100);</span><br><span class="line">		ctx.lineTo(200,200);</span><br><span class="line">		ctx.strokeStyle=<span class="string">'red'</span></span><br><span class="line">		ctx.lineWidth=10;</span><br><span class="line">		ctx.fillStyle=<span class="string">'green'</span></span><br><span class="line">		ctx.stroke(); </span><br><span class="line">		ctx.fill();</span><br><span class="line">		线段</span><br><span class="line">		1、ctx.moveTo(x,y);移动到x,y坐标点</span><br><span class="line">		2、ctx.lineTo(x,y);从当前点绘制直线到x,y点</span><br><span class="line">		3、ctx.stroke();描边</span><br><span class="line">		4、ctx.lineWidth=20;设置线段宽度</span><br><span class="line">		5、ctx.closePath();闭合当前路径 和回到起始点的区别</span><br><span class="line">		6、ctx.fill();填充</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+        <h6 id="json"><a href="#json" class="headerlink" title="json"></a>json</h6><p>  json是一种传输数据的格式（以对象为样板，本质上就是对象，但用途有区别，对象就是本地用的，json是用来传输的）JSON.parse();string-&gt;json JSON.stringify();json-&gt;string</p>
+<h6 id="异步加载js"><a href="#异步加载js" class="headerlink" title="异步加载js"></a>异步加载js</h6><p>  js加载的缺点：加载工具方法没必要阻塞文档，过得js加载会影响页面效率，一旦网速不好，那么整个网站将等待js加载而不进行后续渲染等工作<br>  有些工具方法需要按需加载，用到再加载，不用不加载。</p>
+<h6 id="javascript异步加载的三种方案"><a href="#javascript异步加载的三种方案" class="headerlink" title="javascript异步加载的三种方案"></a>javascript异步加载的三种方案</h6><p>1、defer异步加载，但要等到dom文档全部解析完才会被执行。只有IE能用。<br>2、async异步加载，加载完就执行，async只能加载外部脚本，不能把js写在script标签里。<br>3、创建script，插入到dom中，加载完毕后callBack，</p>
+<h6 id="js加载时间线"><a href="#js加载时间线" class="headerlink" title="js加载时间线"></a>js加载时间线</h6><p>1、创建Document对象，开始解析web页面。解析HTML元素和他们的文本内容后添加Element对象和Text节点到文档中。这个阶段document.readyState = ‘loading’。<br>2、遇到link外部css，创建线程加载，并继续解析文档。</p>
+<p>3、遇到script外部js，并且没有设置async、defer，浏览器加载，并阻塞，等待js加载完成并执行该脚本，然后继续解析文档。<br>4、遇到script外部js，并且设置有async、defer，浏览器创建线程加载，并继续解析文档。<br>对于async属性的脚本，脚本加载完成后立即执行。（异步禁止使用document.write()）<br>5、遇到img等，先正常解析dom结构，然后浏览器异步加载src，并继续解析文档。<br>6、当文档解析完成，document.readyState = ‘interactive’。<br>7、文档解析完成后，所有设置有defer的脚本会按照顺序执行。（注意与async的不同,但同样禁止使用document.write()）;<br>8、document对象触发DOMContentLoaded事件，这也标志着程序执行从同步脚本执行阶段，转化为事件驱动阶段。<br>9、当所有async的脚本加载完成并执行后、img等加载完成后，document.readyState = ‘complete’，window对象触发load事件。<br>10、从此，以异步响应方式处理用户输入、网络事件等。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">		console.log(document.readyState);</span><br><span class="line">		document.onreadystatechange=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">			console.log(document.readyState)</span><br><span class="line">		&#125;</span><br><span class="line">		document.addEventListener(<span class="string">'DOMContentLoaded'</span>,<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">			console.log(<span class="string">'a'</span>)</span><br><span class="line">		&#125;,<span class="literal">false</span>)</span><br><span class="line">		打印：loading</span><br><span class="line">			  interactive</span><br><span class="line">			  a</span><br><span class="line">			  complate</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -346,8 +350,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2018/09/21/notes05/" rel="next" title="CSS3以及css知识点">
-                <i class="fa fa-chevron-left"></i> CSS3以及css知识点
+              <a href="/blog/2018/10/08/事件/" rel="next" title="事件">
+                <i class="fa fa-chevron-left"></i> 事件
               </a>
             
           </div>
@@ -356,8 +360,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2018/09/21/notes08/" rel="prev" title="多媒体">
-                多媒体 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2018/10/09/正则/" rel="prev" title="正则表达式">
+                正则表达式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -420,8 +424,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -477,6 +490,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#json"><span class="nav-number">1.</span> <span class="nav-text">json</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#异步加载js"><span class="nav-number">2.</span> <span class="nav-text">异步加载js</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#javascript异步加载的三种方案"><span class="nav-number">3.</span> <span class="nav-text">javascript异步加载的三种方案</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#js加载时间线"><span class="nav-number">4.</span> <span class="nav-text">js加载时间线</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -641,9 +670,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://liulanjun189.github.io/blog/2018/09/21/notes06/';
-          this.page.identifier = '2018/09/21/notes06/';
-          this.page.title = 'canvas的知识';
+          this.page.url = 'https://liulanjun189.github.io/blog/2018/10/08/json异步加载时间线/';
+          this.page.identifier = '2018/10/08/json异步加载时间线/';
+          this.page.title = 'json、异步加载、时间线';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';

@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="创建正则表达式的两种方式 直接量 var reg=/abc/   RegExp对象 var reg=new RegExp(pattern,attributes) pattern参数是一个字符串，指定了正则表达式的模式或其他正则表达式 attributes(修饰符) 标准化之前，不支持m属性。如果pattern是正则表达式，而不是字符串，则必须省略改参数。 返回值如果var reg=RegExp(r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式">
+<meta property="og:url" content="https://liulanjun189.github.io/blog/2018/10/09/正则/index.html">
+<meta property="og:site_name" content="刘兰俊的笔记">
+<meta property="og:description" content="创建正则表达式的两种方式 直接量 var reg=/abc/   RegExp对象 var reg=new RegExp(pattern,attributes) pattern参数是一个字符串，指定了正则表达式的模式或其他正则表达式 attributes(修饰符) 标准化之前，不支持m属性。如果pattern是正则表达式，而不是字符串，则必须省略改参数。 返回值如果var reg=RegExp(r">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-09T08:24:05.733Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则表达式">
+<meta name="twitter:description" content="创建正则表达式的两种方式 直接量 var reg=/abc/   RegExp对象 var reg=new RegExp(pattern,attributes) pattern参数是一个字符串，指定了正则表达式的模式或其他正则表达式 attributes(修饰符) 标准化之前，不支持m属性。如果pattern是正则表达式，而不是字符串，则必须省略改参数。 返回值如果var reg=RegExp(r">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":16,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://liulanjun189.github.io/blog/2018/10/09/正则/"/>
+
+
+
+
+
+  <title>正则表达式 | 刘兰俊的笔记</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘兰俊的笔记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liulanjun189.github.io/blog/blog/2018/10/09/正则/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liulanjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/tou_pic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘兰俊的笔记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">正则表达式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-09T10:58:15+08:00">
+                2018-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/10/09/正则/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/09/正则/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h6 id="创建正则表达式的两种方式"><a href="#创建正则表达式的两种方式" class="headerlink" title="创建正则表达式的两种方式"></a>创建正则表达式的两种方式</h6><ul>
+<li>直接量<ul>
+<li>var reg=/abc/</li>
+</ul>
+</li>
+<li>RegExp对象<ul>
+<li>var reg=new RegExp(pattern,attributes)<ul>
+<li>pattern参数是一个字符串，指定了正则表达式的模式或其他正则表达式</li>
+<li>attributes(修饰符) 标准化之前，不支持m属性。如果pattern是正则表达式，而不是字符串，则必须省略改参数。</li>
+<li>返回值<br>如果var reg=RegExp(reg) ，RegExp不加new的话，返回值只是reg的引用，如果加上new的话虽然形式上一样，但却是两个独立的正则表达式</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h6><p>修饰符用于执行区分大小写和全局匹配：<br>i 执行对大小写不敏感的匹配<br>g 执行全局匹配(查找所有匹配而非在找到第一个匹配后停止)<br>m 执行多行匹配</p>
+<h6 id="方括号"><a href="#方括号" class="headerlink" title="方括号"></a>方括号</h6><p>[abc] 查找方括号之间的任何字符<br>[^abc] 查找任何不在方括号之间的字符<br>[0-9] 查找任何从0至9的数字<br>[a-z] 查找任何从小写a到小写z的字符<br>[A-Z] 查找任何从大写A到小写Z的字符<br>[adgk] 查找给定集合内的任何字符<br>[^adgk] 查找给定集合外的任何字符<br>(red|blue|green) 查找任何指定的选项</p>
+<h6 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h6><p>.查找单个字符，除了换行和行结束符<br>\w查找单词字符<br>\W查找非单词字符<br>\d查找0-9的数字<br>\D查找非数字字符<br>\s查找空白字符<br>\S查找非空白字符(包含空格，制表符，回车符，换行符，垂直换行符，换页符)<br>\b匹配单词边界<br>\B匹配非单词边界<br>\0查找NUL字符<br>\n查找换行符<br>\f查找换页符<br>\r查找回车符<br>\t查找制表符<br>\v查找垂直制表符</p>
+<h6 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h6><p>n+匹配任何包含至少一个n的字符串<br>n* 匹配任何包含零个或多个n的字符串<br>n?匹配任何包含零个或一个n的字符串<br>n{x}匹配包含X个n的序列的字符串<br>n{X,Y}匹配包含X至Y个n的序列的字符串<br>n{X,}匹配包含至少X个n的序列的字符串<br>n$匹配任何结尾为n的字符串<br>^n匹配任何开头为n的字符串<br>?=n匹配任何其后紧接指定字符串n的字符串<br>?!n匹配任何其后没有紧接指定字符串n的字符串</p>
+<p>######RegExp对象方法<br>compile 编译正则表达式<br>exec 检索字符串中指定的值。返回找到的值，并确定其位置<br>test 检索字符串中指定的值。返回true或false</p>
+<h6 id="支持正则表达式的String对象的方法"><a href="#支持正则表达式的String对象的方法" class="headerlink" title="支持正则表达式的String对象的方法"></a>支持正则表达式的String对象的方法</h6><p>search检索与正则表达式相匹配的值<br>match找到一个或多个正则表达式的匹配<br>replace替换与正则表达式匹配的子串<br>split把字符串分割为字符串数组<br>示例代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">		字面量和regExp对象的创建方法</span><br><span class="line">		var str=<span class="string">"abce"</span></span><br><span class="line">		var reg=/abc/igm; //abc</span><br><span class="line">		或者var reg=new RegExp(<span class="string">'abc'</span>,<span class="string">'mig'</span>)//abc</span><br><span class="line">		console.log(reg.test(str))//<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">		var reg1=/abc/igm;//abc</span><br><span class="line">		var reg2=new RegExp(reg1)//abc区别：虽然返回的结果一样，但跟reg1不是同一个正则表达式了</span><br><span class="line">		var reg2=RegExp(reg1)//abc 区别：返回的结果一样，跟reg1指向同一个引用</span><br><span class="line">		</span><br><span class="line">		var reg=/ababab/g</span><br><span class="line">		str.match(reg)//[<span class="string">'ab'</span>,<span class="string">'ab'</span>,<span class="string">'ab'</span>]</span><br><span class="line"></span><br><span class="line">		var reg=/^a/gm</span><br><span class="line">		var str=<span class="string">"abcde\na"</span></span><br><span class="line">		str.match(reg)//[<span class="string">'a'</span>,<span class="string">'a'</span>]加上m之后\n后面的a也会匹配出来</span><br><span class="line"></span><br><span class="line">		var reg=/[1234567890][1234567890][1234567890]/g</span><br><span class="line">		var str=<span class="string">"12309u98723zpoixouqwr"</span></span><br><span class="line">		str.match(reg)//[<span class="string">'123'</span>,<span class="string">'987'</span>]</span><br><span class="line"></span><br><span class="line">		var reg=/[ab][<span class="built_in">cd</span>][d]/g</span><br><span class="line">		var str=<span class="string">"abcd"</span></span><br><span class="line">		str.match(reg)//[<span class="string">'bcd'</span>]</span><br><span class="line"></span><br><span class="line">		var reg = /[0-9A-z][<span class="built_in">cd</span>][d]/g;</span><br><span class="line">		var str = <span class="string">"ab1cd"</span></span><br><span class="line">		str.match(reg)//[<span class="string">'1cd'</span>]</span><br><span class="line">		</span><br><span class="line">		^放到[]里面表示非</span><br><span class="line">		var reg = /[^a][^b]/g;</span><br><span class="line">		var str = <span class="string">"ab1cd"</span></span><br><span class="line">		str.match(reg)//[<span class="string">'b1,'</span><span class="built_in">cd</span><span class="string">']</span></span><br><span class="line"><span class="string">		表达式区间</span></span><br><span class="line"><span class="string">		var reg = /(abc|bcd)[0-9]/g;</span></span><br><span class="line"><span class="string">		var str = "abc2"</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span>abc2<span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		//\w===[0-9A-z_]</span></span><br><span class="line"><span class="string">		//\W===[^\w]</span></span><br><span class="line"><span class="string">		//\d===[0-9]</span></span><br><span class="line"><span class="string">		//\D===[^\d]</span></span><br><span class="line"><span class="string">		//\s===[\t\n\r\v\f ]</span></span><br><span class="line"><span class="string">		//\S ===[^\s]</span></span><br><span class="line"><span class="string">		//\b===单词边界</span></span><br><span class="line"><span class="string">		//\B===非单词边界</span></span><br><span class="line"><span class="string">		//. ===[^\r\n]</span></span><br><span class="line"><span class="string">		var reg=/\Wcd2/g</span></span><br><span class="line"><span class="string">		var str="b*cd2"</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span>*cd2<span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		var reg=/\d\d\d/g</span></span><br><span class="line"><span class="string">		var str='</span>123<span class="string">'</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span>123<span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		var reg=/[\w\d]/g</span></span><br><span class="line"><span class="string">		var str='</span>s<span class="string">'</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span>s<span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		var reg=/\bcde\b/g;</span></span><br><span class="line"><span class="string">		var str="abc cde fgh"</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span>cde<span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		var reg=/\bcde\B/g;</span></span><br><span class="line"><span class="string">		var str="abc cdefgh"</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span>cde<span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		var reg=/\tc/g</span></span><br><span class="line"><span class="string">		var str="abc\tcdefgn"</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span>	c<span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		var reg=/./g</span></span><br><span class="line"><span class="string">		var str="您好"</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span>您<span class="string">','</span>好<span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		//n+ &#123;1, &#125;</span></span><br><span class="line"><span class="string">		//n* &#123;0, &#125;</span></span><br><span class="line"><span class="string">		//n? &#123;0,1&#125;</span></span><br><span class="line"><span class="string">		//n&#123;x&#125; &#123;x&#125;</span></span><br><span class="line"><span class="string">		//n&#123;x,y&#125; &#123;x,y&#125;</span></span><br><span class="line"><span class="string">		//n&#123;x,&#125; &#123;x,&#125;</span></span><br><span class="line"><span class="string">		var reg=/\W+/g</span></span><br><span class="line"><span class="string">		var str="abc"</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span>abc<span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		var reg=/\W*/g</span></span><br><span class="line"><span class="string">		var str="abc"</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span>abc<span class="string">','</span><span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		var reg=/\d*/g</span></span><br><span class="line"><span class="string">		var str="abc"</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span><span class="string">','</span><span class="string">','</span><span class="string">','</span><span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		var reg=/\d?/g</span></span><br><span class="line"><span class="string">		var str="abc"</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span>a<span class="string">','</span>b<span class="string">','</span>c<span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		var reg=/\w&#123;3&#125;/g</span></span><br><span class="line"><span class="string">		var str="abcabc"</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span>abc<span class="string">','</span>abc<span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		var reg=/^abc$/g</span></span><br><span class="line"><span class="string">		var str="abc"</span></span><br><span class="line"><span class="string">		str.match(reg)//['</span>abc<span class="string">']</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2018/10/08/json异步加载时间线/" rel="next" title="json、异步加载、时间线">
+                <i class="fa fa-chevron-left"></i> json、异步加载、时间线
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2018/10/09/javascript常用的知识点/" rel="prev" title="javascript常用的知识点">
+                javascript常用的知识点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/blog/images/tou_pic.png"
+                alt="liulanjun" />
+            
+              <p class="site-author-name" itemprop="name">liulanjun</p>
+              <p class="site-description motion-element" itemprop="description">学习永无止境！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liulanjun189" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#创建正则表达式的两种方式"><span class="nav-number">1.</span> <span class="nav-text">创建正则表达式的两种方式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#修饰符"><span class="nav-number">2.</span> <span class="nav-text">修饰符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#方括号"><span class="nav-number">3.</span> <span class="nav-text">方括号</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#元字符"><span class="nav-number">4.</span> <span class="nav-text">元字符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#量词"><span class="nav-number">5.</span> <span class="nav-text">量词</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#支持正则表达式的String对象的方法"><span class="nav-number">6.</span> <span class="nav-text">支持正则表达式的String对象的方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liulanjun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://liulanjun189.github.io/blog/2018/10/09/正则/';
+          this.page.identifier = '2018/10/09/正则/';
+          this.page.title = '正则表达式';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
