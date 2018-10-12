@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么是原型？1、定义：原型是function对象的一个属性，它定义了构造函数制造出的对象的公共 祖先。通过该构造函数产生的对象，可以继承该原型的属性和方法。原型也是对 象。 2、利用原型特点和概念，可以提取共有属性。 3、对象如何查看原型-&amp;gt;隐式属性_proto_ 4、对象如何查看对象的构造函数--&amp;gt;constructor 什么是构造函数 （大驼峰式）Person.prototype—">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原型、原型链、call、apply">
+<meta property="og:url" content="https://liulanjun189.github.io/blog/2018/10/09/notes03/index.html">
+<meta property="og:site_name" content="刘兰俊的笔记">
+<meta property="og:description" content="什么是原型？1、定义：原型是function对象的一个属性，它定义了构造函数制造出的对象的公共 祖先。通过该构造函数产生的对象，可以继承该原型的属性和方法。原型也是对 象。 2、利用原型特点和概念，可以提取共有属性。 3、对象如何查看原型-&amp;gt;隐式属性_proto_ 4、对象如何查看对象的构造函数--&amp;gt;constructor 什么是构造函数 （大驼峰式）Person.prototype—">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-09T09:56:47.524Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="原型、原型链、call、apply">
+<meta name="twitter:description" content="什么是原型？1、定义：原型是function对象的一个属性，它定义了构造函数制造出的对象的公共 祖先。通过该构造函数产生的对象，可以继承该原型的属性和方法。原型也是对 象。 2、利用原型特点和概念，可以提取共有属性。 3、对象如何查看原型-&amp;gt;隐式属性_proto_ 4、对象如何查看对象的构造函数--&amp;gt;constructor 什么是构造函数 （大驼峰式）Person.prototype—">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":16,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://liulanjun189.github.io/blog/2018/10/09/notes03/"/>
+
+
+
+
+
+  <title>原型、原型链、call、apply | 刘兰俊的笔记</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘兰俊的笔记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liulanjun189.github.io/blog/blog/2018/10/09/notes03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liulanjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/tou_pic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘兰俊的笔记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">原型、原型链、call、apply</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-09T17:56:47+08:00">
+                2018-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/10/09/notes03/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/09/notes03/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是原型？"><a href="#什么是原型？" class="headerlink" title="什么是原型？"></a>什么是原型？</h2><pre><code>1、定义：原型是function对象的一个属性，它定义了构造函数制造出的对象的公共
+祖先。通过该构造函数产生的对象，可以继承该原型的属性和方法。原型也是对
+象。
+2、利用原型特点和概念，可以提取共有属性。
+3、对象如何查看原型-&gt;隐式属性_proto_
+4、对象如何查看对象的构造函数--&gt;constructor
+</code></pre><p>什么是构造函数 （大驼峰式）<br>Person.prototype—-原型<br>Person.prototype={} 是祖先<br>代码示例<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">		Person.prototype.name=<span class="string">"hehe"</span></span><br><span class="line">		Person.prototype.say=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">			console.log(<span class="string">'Deng'</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">function</span> Person(name,age,sex)&#123;</span><br><span class="line">			this.name=name;</span><br><span class="line">			this.age=age;</span><br><span class="line">			this.sex=sex;</span><br><span class="line">		&#125;</span><br><span class="line">		var person=new Person(<span class="string">'xuming'</span>,35,<span class="string">'male'</span>);</span><br><span class="line">		原型的增、删、改、查</span><br><span class="line">		Person.prototype.eat=<span class="string">"banana"</span>//增</span><br><span class="line">		Person.prototype.eat=<span class="string">"Apple"</span>//改</span><br><span class="line">		Person.prototype.eat//查</span><br><span class="line">		delete person.name//(可以删除自己的属性,不能删除原型中的属性)</span><br><span class="line">		批量给原型增加属性</span><br><span class="line">		Person.prototype=&#123;</span><br><span class="line">			height:<span class="string">'1.90'</span>,</span><br><span class="line">			lang:<span class="string">'4900'</span>,</span><br><span class="line">			name:<span class="string">'BMW'</span></span><br><span class="line">		&#125;</span><br><span class="line">		constructor 构造器</span><br><span class="line">		<span class="keyword">function</span> <span class="function"><span class="title">Person</span></span>()&#123;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		Car.prototype=&#123;</span><br><span class="line">			constructor:Person//改变构造器</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">function</span> <span class="function"><span class="title">Car</span></span>()&#123;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		var car=new Car();</span><br><span class="line">		car.constructor//打印<span class="keyword">function</span> Person（）&#123;&#125;//查看构造它的构造函数</span><br><span class="line">		改变原型</span><br><span class="line">		Person.prototype.name=<span class="string">"sunny"</span></span><br><span class="line">		<span class="keyword">function</span> <span class="function"><span class="title">Person</span></span>()&#123;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		var person= new Person();</span><br><span class="line">		Person.prototype.name=<span class="string">"cerney"</span></span><br><span class="line"></span><br><span class="line">		person.name//打印cerney //后面的原型会替换原来的</span><br><span class="line"></span><br><span class="line">		不会被替换</span><br><span class="line">		Person.prototype.name=<span class="string">"sunny"</span></span><br><span class="line">		<span class="keyword">function</span> <span class="function"><span class="title">Person</span></span>()&#123;</span><br><span class="line">			//var this=&#123;_proto_:Person.prototype&#125;//还是原来的</span><br><span class="line">		&#125;</span><br><span class="line">		var person= new Person();</span><br><span class="line">		Person.prototype=&#123;</span><br><span class="line">			name:<span class="string">'cerney'</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		person.name//sunny</span><br><span class="line"></span><br><span class="line">		//Person.prototype=&#123;name:<span class="string">'a'</span>&#125;;</span><br><span class="line">		//__proto__=Person.prototype;</span><br><span class="line">		//Person.prototype=&#123;name:<span class="string">'b'</span>&#125;</span><br><span class="line"></span><br><span class="line">		会被替换的情况</span><br><span class="line">		<span class="keyword">function</span> <span class="function"><span class="title">Person</span></span>()&#123;</span><br><span class="line">			//var this=&#123;__proto__:Person.prototype&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		Person.prototype.name=<span class="string">'sunny'</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">function</span> <span class="function"><span class="title">Person</span></span>()&#123;//函数会提升</span><br><span class="line">			//var this=&#123;__proto__:Person.prototype&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		Person.prototype=&#123;//会替换上面的</span><br><span class="line">			name:<span class="string">'cherry'</span></span><br><span class="line">		&#125;</span><br><span class="line">		var person=new Person()</span><br><span class="line">		person.name//cherry</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p>如何构成原型链？</p>
+<!-- Grand.prototype.__proto__=Object.prototype -->
+<p>示例代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">		Grand.prototype.lastName=<span class="string">"Deng"</span>;</span><br><span class="line">		<span class="keyword">function</span> <span class="function"><span class="title">Grand</span></span>()&#123;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		var grand=new Grand();</span><br><span class="line">		Father.prototype=grand;</span><br><span class="line">		<span class="keyword">function</span> <span class="function"><span class="title">Father</span></span>()&#123;</span><br><span class="line">			this.name=<span class="string">'xuming'</span></span><br><span class="line">		&#125;</span><br><span class="line">		var father=new Father();</span><br><span class="line">		Son.prototype=father;</span><br><span class="line">		<span class="keyword">function</span> <span class="function"><span class="title">Son</span></span>()&#123;</span><br><span class="line">			this.hobbit=<span class="string">'smoke'</span></span><br><span class="line">		&#125;</span><br><span class="line">		var son=new Son()</span><br><span class="line"></span><br><span class="line">		原型链上属性的增删改查</span><br><span class="line">		绝大多数对象的最终都会继承自Object.prototype</span><br><span class="line">		Object.create(原型)</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<!-- Object.prototype.toString
+NUmber.prototype.toString
+Array.prototype.toString
+Boolean.prototype.toString
+String.prototype.toString -->
+<h2 id="call-apply"><a href="#call-apply" class="headerlink" title="call/apply"></a>call/apply</h2><p>示例代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">		<span class="keyword">function</span> Person(name,age,sex)&#123;</span><br><span class="line">			this.name=name;</span><br><span class="line">			this.age=age;</span><br><span class="line">			this.sex=sex;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">function</span> Student(name,age,sex,tel,grade)&#123;</span><br><span class="line">			Person.call(this,name,age,sex);</span><br><span class="line">			Person.apply(this,[name,age,sex]);</span><br><span class="line">			this.tel=tel;</span><br><span class="line">			this.grade=grade;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		var student=new Student(<span class="string">'sunny'</span>,123,<span class="string">'male'</span>,139,2017)</span><br><span class="line"></span><br><span class="line">		call需要把实参按照形参的个数传进去</span><br><span class="line">		apply 需要传一个arguments</span><br><span class="line"></span><br><span class="line">		call和apply方法是做什么的，两者有什么区别？</span><br><span class="line">		改变this的指向，区别：两者传参列表不同</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2018/10/09/notes02/" rel="next" title="作用域、作用域链、立即执行函数、闭包">
+                <i class="fa fa-chevron-left"></i> 作用域、作用域链、立即执行函数、闭包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2018/10/09/notes04/" rel="prev" title="this关键字">
+                this关键字 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/blog/images/tou_pic.png"
+                alt="liulanjun" />
+            
+              <p class="site-author-name" itemprop="name">liulanjun</p>
+              <p class="site-description motion-element" itemprop="description">学习永无止境！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liulanjun189" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是原型？"><span class="nav-number">1.</span> <span class="nav-text">什么是原型？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型链"><span class="nav-number">2.</span> <span class="nav-text">原型链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#call-apply"><span class="nav-number">3.</span> <span class="nav-text">call/apply</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liulanjun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://liulanjun189.github.io/blog/2018/10/09/notes03/';
+          this.page.identifier = '2018/10/09/notes03/';
+          this.page.title = '原型、原型链、call、apply';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、css之间的权重!important   Infinity 行间样式      1000 id             100 class|属性|伪类  10 标签选择器|伪元素 1 通配符            0 2、CSS3中浏览器的兼容性前缀-webkit-           chrome/safari -moz-              firefox -ms-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3以及css知识点">
+<meta property="og:url" content="https://liulanjun189.github.io/blog/2018/10/09/notes05/index.html">
+<meta property="og:site_name" content="刘兰俊的笔记">
+<meta property="og:description" content="1、css之间的权重!important   Infinity 行间样式      1000 id             100 class|属性|伪类  10 标签选择器|伪元素 1 通配符            0 2、CSS3中浏览器的兼容性前缀-webkit-           chrome/safari -moz-              firefox -ms-">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-09T09:56:47.527Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS3以及css知识点">
+<meta name="twitter:description" content="1、css之间的权重!important   Infinity 行间样式      1000 id             100 class|属性|伪类  10 标签选择器|伪元素 1 通配符            0 2、CSS3中浏览器的兼容性前缀-webkit-           chrome/safari -moz-              firefox -ms-">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":16,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://liulanjun189.github.io/blog/2018/10/09/notes05/"/>
+
+
+
+
+
+  <title>CSS3以及css知识点 | 刘兰俊的笔记</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘兰俊的笔记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liulanjun189.github.io/blog/blog/2018/10/09/notes05/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liulanjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/tou_pic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘兰俊的笔记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSS3以及css知识点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-09T17:56:47+08:00">
+                2018-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/10/09/notes05/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/09/notes05/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h6 id="1、css之间的权重"><a href="#1、css之间的权重" class="headerlink" title="1、css之间的权重"></a>1、css之间的权重</h6><pre><code>!important   Infinity
+行间样式      1000
+id             100
+class|属性|伪类  10
+标签选择器|伪元素 1
+通配符            0
+</code></pre><h6 id="2、CSS3中浏览器的兼容性前缀"><a href="#2、CSS3中浏览器的兼容性前缀" class="headerlink" title="2、CSS3中浏览器的兼容性前缀"></a>2、CSS3中浏览器的兼容性前缀</h6><pre><code>-webkit-           chrome/safari
+-moz-              firefox
+-ms-               IE
+-o-                opera
+</code></pre><h6 id="3、css3中border-radius属性"><a href="#3、css3中border-radius属性" class="headerlink" title="3、css3中border-radius属性"></a>3、css3中border-radius属性</h6><pre><code>border-radius:50% 50%  //圆形
+border-radius-top-left:50% 100%  border-radius-top-right: 50% 100%  //x轴50%  y轴100% 半圆
+border-radius:5px //圆角
+</code></pre><h6 id="4、css3中box-shadow属性"><a href="#4、css3中box-shadow属性" class="headerlink" title="4、css3中box-shadow属性"></a>4、css3中box-shadow属性</h6><pre><code>box-shadow：x轴偏移量Y轴偏移量[阴影模糊半径][阴影扩展半径]
+[阴影颜色][投影方式];
+eg:
+.box-shadow{
+    box-shadow:4px 2px 6px 7px #333333 inset
+}
+同一盒子，可以同时加多个阴影，阴影之间用，隔开
+.box_shadow{
+    box-shadow:4px 2px 6px #foo,-4px -2px 6px #000,
+    0px 0px 12px 5px #33ccoo inset  //默认向外投影  inset向内投影
+}
+css3在做动画的时候会影响性能的属性就是box-shadow text-shadow
+</code></pre><h6 id="5、css3中text-shadow属性"><a href="#5、css3中text-shadow属性" class="headerlink" title="5、css3中text-shadow属性"></a>5、css3中text-shadow属性</h6><pre><code>text-shadow:x-offset y-offset blur color //blur 阴影的模糊程度
+eg:
+text-shadow:0 1px 1px #fff
+6、border实现三角
+border：100px solid #000;
+border-left-color:transparent;
+border-top-color:transparent;
+border-right-color:transparent;
+</code></pre><h6 id="7、父级跟子级元素同时设置margin-top会出现盒子塌陷"><a href="#7、父级跟子级元素同时设置margin-top会出现盒子塌陷" class="headerlink" title="7、父级跟子级元素同时设置margin-top会出现盒子塌陷"></a>7、父级跟子级元素同时设置margin-top会出现盒子塌陷</h6><pre><code>解决：利用bfc-&gt;block format context 块级格式化上下文
+如何触发一个盒子的bfc
+1、position:absolute;
+2、display:inline-block
+3、float:left/right;
+4、overflow:hidden;
+8、css3的渐变分为两种
+1、线性渐变
+语法linear-gradient([direction],color[percent],color[percent],...);
+direction 角度的单位为deg也可以用to bottom,to left,to top left等方式来表达
+</code></pre><h6 id="2、径向渐变"><a href="#2、径向渐变" class="headerlink" title="2、径向渐变"></a>2、径向渐变</h6><pre><code>语法：radial-gradient(shape at potion,color[percent],color,...)
+shape:放射的形状，可以为原型circle，可以为椭圆ellipse position：圆心位置
+，可以两个值，也可以一个，如果为一个时，第二个值默认center即50%。值类型
+可以为百分数，距离像素，也可以是方位值；x轴主半径，y轴次半径
+</code></pre><h6 id="9、文字边界换行"><a href="#9、文字边界换行" class="headerlink" title="9、文字边界换行"></a>9、文字边界换行</h6><pre><code>word-wrap:normal|break-word;
+10、font-face 可以引入字体库
+@font-face{
+    font-family:&quot;myFirstFont&quot;;
+    src:url(&apos;&apos;),url(&apos;&apos;) format(&apos;&apos;)
+}
+p{
+    font-family:&apos;myFirstFont&apos;
+}
+format:此值指的是你自定义的字体的格式，主要用来帮助浏览器识别浏览器对@font-face的兼容问题，这里涉及到一个字体format的问题，因为不同的浏览器对字体格式支持是不一致的，浏览器自身也无法通过路径后缀来判断字体
+</code></pre><h6 id="10、盒模型"><a href="#10、盒模型" class="headerlink" title="10、盒模型"></a>10、盒模型</h6><pre><code>在css中盒模型被分为两种，第一种是w3c的标准盒模型，另一种是ie6混杂模式的传统模型。他们都是对元素计算尺寸的模型。但他们的不同是计算方式的不同
+1、w3c标准盒模型
+element空间高度(盒子) =width+padding+border;
+width为内容高度。即width不包括padding和border
+2、IE6混杂模式盒模型
+内容高度（盒子）=width-padding-border
+即设置width的数值就是element的空间高度，width包含padding和border
+3、css3中有一个可以选择盒模型的属性
+先把宽度高度固定好，里面用padding调，再用box-sizing:border-box
+box-sizing：border-box/content-box
+content-box为w3c标准盒子
+border-box为ie6混杂模式的盒子
+</code></pre><h6 id="11、弹性盒子display-flex"><a href="#11、弹性盒子display-flex" class="headerlink" title="11、弹性盒子display:flex"></a>11、弹性盒子display:flex</h6><pre><code>flex为复核属性，且必须配合父元素display:flex使用
+以下6个属性设置在项目（子元素）上：
+flex-grow：放大比例
+flex-shrink：缩小比例
+flex-basis：伸缩基准值
+flex：是flex-grow，flex-shrink和flex-basis的简写
+常用简化写法：
+flex：1-&gt;flex:1 1 0%
+flex:3-&gt;flex:3 1 0%
+order：排列顺序
+align-self：单个项目对齐方式
+.demo{
+    align-self:auto|flex-start|flex-end|center|baseLine|stretch
+}
+以下属性设置在父元素上
+1、flex-direction 决定主轴的方向
+.box{
+    flex-direction:row|row-reverse|column|column-reverse
+}
+row(默认值)：主轴为水平方向，起点在左端
+row-reverse:主轴为水平方向，起点在右端
+column:主轴为垂直方向，起点在上沿
+column-reverse：主轴为垂直方向，起点在下沿
+2、flex-wrap是否换行
+默认情况下，项目都排在一条线（又称‘轴线’）上。flex-wrap属性定义，如果一条轴线排不下，如何换行
+.box{
+    flex-wrap:nowrap|wrap|wrap-reverse;
+}
+(1)nowrap(默认)：不换行
+(2)wrap:换行，第一行在上方
+(3)wrap-reverse:换行，第一行在下方
+3、flex-flow  flex-direction和flex-wrap的简写
+4、justify-content 项目在主轴上的对齐方式
+justify-content属性定义了项目在主轴上的对齐方式
+.box{
+    justify-content:flex-start|flex-end|center|space-between|space-around;
+}
+它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。
+flex-start(默认值)：左对齐
+flex-end：右对齐
+center：居中
+space-between：两端对齐，项目之间的间隔都相等
+space-around：每个项目两侧的间隔相等，所以，项目之间的间隔比项目与边框的间隔大一倍
+demo：居中对齐
+5、align-items 在侧轴上如何对齐
+.box{
+    align-items:flex-start|flex-end|center|baseline|stretch;
+}
+它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下
+flex-start：交叉轴的起点对齐
+flex-end：交叉轴的终点对齐
+center：交叉轴的中点对齐
+baseline：项目的第一行文字的基线对齐
+stretch（默认值）：如果项目未设置高度或设为auto，将沾满整个容器的高度
+
+6、align-content 多根轴线的对齐方式
+align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用
+.box{
+    align-content：flex-start|flex-end|center|space-between|space-around|stretch
+}
+该属性可能取6个值。
+flex-start:与交叉轴的起点对齐
+flex-end：与交叉轴的终点对齐
+center：与交叉轴的终点对齐
+space-between：与交叉轴两端对齐，轴线之间的间隔平均分布
+space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
+stretch（默认值）：轴线占满整个交叉轴
+</code></pre><h6 id="模拟移动端的meta"><a href="#模拟移动端的meta" class="headerlink" title="模拟移动端的meta"></a>模拟移动端的meta</h6><pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no&quot;&gt;
+第一种方法
+&lt;link rel=&quot;stylesheet&quot; media=&quot;screen and (max-width:800px)&quot; href=&quot;./index.css&quot;&gt;
+第二种方法
+@media screen and (max-width:800px) {
+    div{
+    width:100px;
+    height:100px;
+    background-color:red;
+}
+}
+@media screen and (min-width:801px) and(max-width:1000px) {
+    div{
+    width:100px;
+    height:100px;
+    background-color:green
+}
+}
+指定备用功能
+@media screen and (min-width:769px),print and(min-width:6in)
+</code></pre><!-- 指定否定条件
+@media not screen and(monochrome) -->
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2018/10/09/notes04/" rel="next" title="this关键字">
+                <i class="fa fa-chevron-left"></i> this关键字
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2018/10/09/notes06/" rel="prev" title="canvas的知识">
+                canvas的知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/blog/images/tou_pic.png"
+                alt="liulanjun" />
+            
+              <p class="site-author-name" itemprop="name">liulanjun</p>
+              <p class="site-description motion-element" itemprop="description">学习永无止境！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liulanjun189" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#1、css之间的权重"><span class="nav-number">1.</span> <span class="nav-text">1、css之间的权重</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2、CSS3中浏览器的兼容性前缀"><span class="nav-number">2.</span> <span class="nav-text">2、CSS3中浏览器的兼容性前缀</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3、css3中border-radius属性"><span class="nav-number">3.</span> <span class="nav-text">3、css3中border-radius属性</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4、css3中box-shadow属性"><span class="nav-number">4.</span> <span class="nav-text">4、css3中box-shadow属性</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5、css3中text-shadow属性"><span class="nav-number">5.</span> <span class="nav-text">5、css3中text-shadow属性</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#7、父级跟子级元素同时设置margin-top会出现盒子塌陷"><span class="nav-number">6.</span> <span class="nav-text">7、父级跟子级元素同时设置margin-top会出现盒子塌陷</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2、径向渐变"><span class="nav-number">7.</span> <span class="nav-text">2、径向渐变</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9、文字边界换行"><span class="nav-number">8.</span> <span class="nav-text">9、文字边界换行</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#10、盒模型"><span class="nav-number">9.</span> <span class="nav-text">10、盒模型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#11、弹性盒子display-flex"><span class="nav-number">10.</span> <span class="nav-text">11、弹性盒子display:flex</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#模拟移动端的meta"><span class="nav-number">11.</span> <span class="nav-text">模拟移动端的meta</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liulanjun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://liulanjun189.github.io/blog/2018/10/09/notes05/';
+          this.page.identifier = '2018/10/09/notes05/';
+          this.page.title = 'CSS3以及css知识点';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

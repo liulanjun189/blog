@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前端自动化构建工具gulp task running（任务运行器） 可以对代码进行打包，压缩，css3前缀自动补全，将css预处理转化css等等， 没有模块化webpack 可以对代码进行打包，压缩，css3前缀自动补全，将css预处理转化css等等 有模块化 gulpjs 没有模块化  有四个API  task src dest watch监听 安装gulp1输入 cnpm install gu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gulp">
+<meta property="og:url" content="https://liulanjun189.github.io/blog/2018/10/09/notes09/index.html">
+<meta property="og:site_name" content="刘兰俊的笔记">
+<meta property="og:description" content="前端自动化构建工具gulp task running（任务运行器） 可以对代码进行打包，压缩，css3前缀自动补全，将css预处理转化css等等， 没有模块化webpack 可以对代码进行打包，压缩，css3前缀自动补全，将css预处理转化css等等 有模块化 gulpjs 没有模块化  有四个API  task src dest watch监听 安装gulp1输入 cnpm install gu">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-11T02:23:02.020Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gulp">
+<meta name="twitter:description" content="前端自动化构建工具gulp task running（任务运行器） 可以对代码进行打包，压缩，css3前缀自动补全，将css预处理转化css等等， 没有模块化webpack 可以对代码进行打包，压缩，css3前缀自动补全，将css预处理转化css等等 有模块化 gulpjs 没有模块化  有四个API  task src dest watch监听 安装gulp1输入 cnpm install gu">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":16,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://liulanjun189.github.io/blog/2018/10/09/notes09/"/>
+
+
+
+
+
+  <title>gulp | 刘兰俊的笔记</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘兰俊的笔记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liulanjun189.github.io/blog/blog/2018/10/09/notes09/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liulanjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/tou_pic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘兰俊的笔记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">gulp</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-09T17:56:47+08:00">
+                2018-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/10/09/notes09/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/09/notes09/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前端自动化构建工具"><a href="#前端自动化构建工具" class="headerlink" title="前端自动化构建工具"></a>前端自动化构建工具</h2><pre><code>gulp task running（任务运行器） 可以对代码进行打包，压缩，css3前缀自动补全，将css预处理转化css等等，
+没有模块化webpack 可以对代码进行打包，压缩，css3前缀自动补全，将css预处理转化css等等 有模块化
+</code></pre><p>gulpjs 没有模块化  有四个API  task src dest watch监听</p>
+<p>安装gulp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入 cnpm install gulp -g</span><br></pre></td></tr></table></figure></p>
+<p>在要使用的项目中打开命令行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入npm install gulp --save-dev   （--save-dev）在开发时的依赖</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">		var gulp=require(<span class="string">'gulp'</span>);导入gulp</span><br><span class="line">		var htmlclean=require(<span class="string">'gulp-htmlclean'</span>)导入gulp-htmlclean压缩代码</span><br><span class="line">		var imagesmin=require(<span class="string">'gulp-imagemin'</span>)</span><br><span class="line">		var uglify=require(<span class="string">'gulp-uglify'</span>)</span><br><span class="line">		var debug=require(<span class="string">'gulp-strip-debug'</span>)</span><br><span class="line">		var concat=require(<span class="string">'gulp-concat'</span>)将多个js合并成一个js</span><br><span class="line">		var deporder=require(<span class="string">'gulp-deporder'</span>)</span><br><span class="line">		var less=require(<span class="string">'gulp-less'</span>)</span><br><span class="line">		var postcss=require(<span class="string">'gulp-postcss'</span>)插件集合</span><br><span class="line">		var autoperfixer=require(<span class="string">'autoperfixer'</span>)前缀自动补全</span><br><span class="line">		var cssnano=require(<span class="string">'cssnano'</span>)</span><br><span class="line">		var connect =require(<span class="string">'gulp-connect'</span>)测试服务器</span><br><span class="line">		var folder=&#123;</span><br><span class="line">			src:<span class="string">'src/'</span>,</span><br><span class="line">			dist:<span class="string">'dist/'</span></span><br><span class="line">		&#125;</span><br><span class="line">		gulp.task(<span class="string">'html'</span>,<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">			gulp.src(<span class="string">'folder.src'</span>+<span class="string">'html/*'</span>)</span><br><span class="line">				.pipe(connect.reload())</span><br><span class="line">				.pipe(htmlclean())pipe文件流</span><br><span class="line">			    .pipe(gulp.dest(folder.dist+<span class="string">'html/'</span>))</span><br><span class="line">		&#125;)</span><br><span class="line">		gulp.task(<span class="string">'image'</span>,<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">			gulp.src(folder.src+<span class="string">'images/*'</span>)</span><br><span class="line">			    .pipe(imagemin())</span><br><span class="line">			    .pipe(gulp.dest(folder.dist+<span class="string">'images/'</span>))</span><br><span class="line">		&#125;)</span><br><span class="line">		gulp.task(<span class="string">'js'</span>,<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">			gulp.src(folder.src+<span class="string">'js/*'</span>)</span><br><span class="line">				.pipe(connect.reload())</span><br><span class="line">			    .pipe(concat(<span class="string">'main.js'</span>))//main是自己给命名的</span><br><span class="line">			    .pipe(deporder())</span><br><span class="line">				.pipe(uglify())</span><br><span class="line">				.pipe(stripDebug())</span><br><span class="line">			    .pipe(gulp.dest(folder.dist+<span class="string">'js/'</span>))</span><br><span class="line">		&#125;)</span><br><span class="line">		gulp.task(<span class="string">'css'</span>,<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">			gulp.src(folder.src+<span class="string">'css/*'</span>)</span><br><span class="line">				.pipe(connect.reload())</span><br><span class="line">			    .pipe(less())</span><br><span class="line">			    .pipe(postcss([</span><br><span class="line">			    autoperfixer(),</span><br><span class="line">			    cssnano()</span><br><span class="line"></span><br><span class="line">			    ]))</span><br><span class="line">				</span><br><span class="line">			    .pipe(gulp.dest(folder.dist+<span class="string">'css/'</span>))</span><br><span class="line">		&#125;)</span><br><span class="line">		watch自动更新API</span><br><span class="line">		gulp.task(<span class="string">'watch'</span>,<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">			gulp.watch(folder.src+<span class="string">'html/*'</span>,[html]);</span><br><span class="line">			gulp.watch(folder.src+<span class="string">'images/*'</span>,[images]);</span><br><span class="line">			gulp.watch(folder.src+<span class="string">'js/*'</span>,[js]);</span><br><span class="line">			gulp.watch(folder.src+<span class="string">'css/*'</span>,[css]);</span><br><span class="line">		&#125;)</span><br><span class="line">		gulp.task(<span class="string">'server'</span>,<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">			connect.server(&#123;</span><br><span class="line">			port:<span class="string">'8081'</span>,</span><br><span class="line">			livereload:<span class="literal">true</span> 自动刷新</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;)</span><br><span class="line">		//内网穿透</span><br><span class="line">		gulp.task(<span class="string">'default'</span>,[<span class="string">'html'</span>,<span class="string">'images'</span>,<span class="string">'js'</span>,<span class="string">'css'</span>,<span class="string">'watch'</span>,<span class="string">'server'</span>],<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">			console.log(1)</span><br><span class="line">		&#125;)</span><br><span class="line">		命令行输入</span><br><span class="line">		gulp html 运行</span><br><span class="line">		cnpm install gulp-htmlclean --save-dev    HTML压缩</span><br><span class="line">		cnpm install gulp-imagemin --save-dev    image压缩</span><br><span class="line">		cnpm install gulp-uglify --save-dev  js压缩</span><br><span class="line">		cnpm install gulp-strip-debug --save-dev  </span><br><span class="line">		cnpm install gulp-concat --save-dev  将多个js文件转成一个文件</span><br><span class="line">		cnpm install gulp-less --save-dev</span><br><span class="line"></span><br><span class="line">		cnpm install gulp-postcss --save-dev</span><br><span class="line">		cnpm install autoperfixer --save-dev</span><br><span class="line">		cnpm install cssnano --save-dev</span><br><span class="line">		在需要依赖于公共js的文件中添加</span><br><span class="line">		/*requites:</span><br><span class="line">		jquery.js</span><br><span class="line">		*/</span><br><span class="line">		cnpm install gulp-deporder --save-dev  一个文件的先后顺序</span><br><span class="line">		cnpm install gulp --save-dev         所有文件压缩</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		cnpm install gulp-connect --save-dev</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		插件postcss:前缀，压缩（插件postcss工具的集合）</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2018/10/09/notes08/" rel="next" title="多媒体">
+                <i class="fa fa-chevron-left"></i> 多媒体
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2018/10/09/notes10/" rel="prev" title="获取滚动条滚动距离和窗口尺寸以及元素尺寸">
+                获取滚动条滚动距离和窗口尺寸以及元素尺寸 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/blog/images/tou_pic.png"
+                alt="liulanjun" />
+            
+              <p class="site-author-name" itemprop="name">liulanjun</p>
+              <p class="site-description motion-element" itemprop="description">学习永无止境！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liulanjun189" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前端自动化构建工具"><span class="nav-number">1.</span> <span class="nav-text">前端自动化构建工具</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liulanjun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://liulanjun189.github.io/blog/2018/10/09/notes09/';
+          this.page.identifier = '2018/10/09/notes09/';
+          this.page.title = 'gulp';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
